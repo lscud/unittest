@@ -11,7 +11,7 @@ public class PersonService {
         if(person == null){
             throw new IllegalArgumentException();
         }
-        return person.getAge() >= 18;
+        return person.getAge() >= 21;
     }
 
     public List<Person> filterRemovingNotAdult(List<Person> personList){
