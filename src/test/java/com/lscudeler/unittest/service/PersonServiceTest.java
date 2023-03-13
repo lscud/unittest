@@ -6,6 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonServiceTest {
@@ -35,6 +39,19 @@ class PersonServiceTest {
     @Test
     @DisplayName("Should throw NullPointerException with message when person is null ")
     void isAdult_ShouldThrowException_WhenPersonIsNull() {
-        Assertions.assertThrows(NullPointerException.class, () -> personService.isAdult(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> personService.isAdult(null));
     }
+
+    @Test
+    @DisplayName("Should return list with only adults ")
+    void filterRemovingNotAdult_ReturnLisWithAdultOnly_WhenListOfPersonWithAdultIsPassed() {
+        Person person1 = new Person(17);
+        Person person2 = new Person(18);
+        Person person3 = new Person(23);
+        //List<Person> personList = List.of(person1, person2, person3);
+        List personList = new ArrayList<>();
+        personList.addAll(Arrays.asList(person1, person2, person3));
+        Assertions.assertEquals(2,personService.filterRemovingNotAdult(personList).size());
+    }
+
 }
